@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create Tickets table
+      author: Mehriban Jabbar
+      changes:
+        - createTable:
+            tableName: tickets
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: order_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tracking_code
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValue: now()
+              - column:
+                  name: ticket_details
+                  type: varchar(255)
+              - column:
+                  name: ticket_status
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+
+
