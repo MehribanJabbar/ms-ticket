@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class TicketResponse {
     Long id;
-    String ticketNumber;
     String trackingCode;
     Long orderId;
     LocalDateTime createdAt;

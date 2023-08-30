@@ -8,5 +8,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface TicketRepository extends JpaRepository<TicketEntity, Long> {
     TicketEntity findByTicketStatus(TicketStatus ticketStatus);
 
-    OrderResponse findByOrderId(Long orderId);
 }
