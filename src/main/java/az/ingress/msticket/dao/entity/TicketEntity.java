@@ -28,7 +28,7 @@ public class TicketEntity {
     private String ticketDetails;
 
     @Enumerated(EnumType.STRING)
-    private TicketStatus ticketStatus = TicketStatus.CREATED;
+    private TicketStatus ticketStatus ;
 
     @Override
     public boolean equals(Object o) {

@@ -29,12 +29,6 @@ public class TicketController {
         return ticketService.getTicketByStatus(ticketStatus);
     }
 
-    @GetMapping("/{id}/order")
-    @ResponseStatus(OK)
-    public OrderResponse getOrderByOrderId(@PathVariable Long orderId) {
-        return ticketService.getOrderByOrderId(orderId);
-    }
-
     @PostMapping
     @ResponseStatus(CREATED)
     public void saveTicket(@RequestBody SaveTicketRequest request) {
@@ -43,8 +37,8 @@ public class TicketController {
 
     @PutMapping("/{id}/status")
     @ResponseStatus(OK)
-    public void changeStatus(@PathVariable Long id, @RequestBody TicketStatus status) {
-        ticketService.changeStatus(id, status);
+    public void changeStatus(@PathVariable Long id) {
+        ticketService.changeStatus(id);
     }
 
 }

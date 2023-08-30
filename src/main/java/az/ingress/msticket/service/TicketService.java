@@ -8,6 +8,7 @@ import az.ingress.msticket.enums.TicketStatus;
 import az.ingress.msticket.exception.NotFoundException;
 import az.ingress.msticket.mapper.TicketMapper;
 import az.ingress.msticket.model.response.OrderResponse;
+import az.ingress.msticket.queue.QueueSender;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class TicketService {
     private final TicketRepository ticketRepository;
+    private final QueueSender queueSender;
 
     public TicketResponse getTicketById(Long id) {
         var ticket = ticketRepository.findById(id)
@@ -26,20 +28,17 @@ public class TicketService {
         return TicketMapper.buildToResponse(ticketRepository.findByTicketStatus(status));
     }
 
-    public OrderResponse getOrderByOrderId(Long orderId) {
-        return ticketRepository.findByOrderId(orderId);
-    }
-
     public void saveTicket(SaveTicketRequest request) {
         TicketEntity ticket = TicketMapper.buildToEntity(request);
-        ticket.setTicketStatus(TicketStatus.CREATED);
+        ticket.setTicketStatus(TicketStatus.WAITING);
         ticketRepository.save(ticket);
     }
 
-    public void changeStatus(Long id, TicketStatus newStatus) {
+    public void changeStatus(Long id) {
         var ticket = ticketRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("TICKET_NOT_FOUND"));
-        ticket.setTicketStatus(newStatus);
+        ticket.setTicketStatus(TicketStatus.DONE);
         ticketRepository.save(ticket);
+        queueSender.sendToCardQueue(ticket.getOrderId());
     }
 }

@@ -60,7 +60,7 @@ class TicketServiceTest extends Specification {
         def actual = ticketService.getTicketByStatus(status)
 
         then:
-        1 * ticketRepository.findByTicketStatus(status) >> Optional.of(ticket)
+        1 * ticketRepository.findByTicketStatus(status)
         actual.ticketStatus == ticket.ticketStatus
         actual.id == ticket.id
         actual.trackingCode == ticket.trackingCode
