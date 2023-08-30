@@ -13,6 +13,7 @@ public class TicketMapper {
                 .orderId(ticket.getOrderId())
                 .createdAt(ticket.getCreatedAt())
                 .ticketStatus(ticket.getTicketStatus())
+                .ticketDetails(ticket.getTicketDetails())
                 .build();
     }
 
@@ -22,11 +23,5 @@ public class TicketMapper {
                 .ticketDetails(request.getTicketDetails())
                 .trackingCode(request.getTrackingCode())
                 .build();
-    }
-
-    public static void updateToEntity(TicketEntity ticket, UpdateTicketRequest request){
-        ticket.setTicketDetails(ticket.getTicketDetails());
-        ticket.setTicketStatus(ticket.getTicketStatus());
-        ticket.setOrderId(request.getOrderId());
     }
 }

@@ -8,7 +8,8 @@ import az.ingress.msticket.service.TicketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,19 +19,19 @@ public class TicketController {
 
     @GetMapping("/{id}")
     @ResponseStatus(OK)
-    public TicketResponse getTicketResponseById(@PathVariable Long id) {
+    public TicketResponse getTicketById(@PathVariable Long id) {
         return ticketService.getTicketById(id);
     }
 
     @GetMapping("/status")
     @ResponseStatus(OK)
-    public TicketResponse getTicketById(@RequestBody TicketStatus ticketStatus){
+    public TicketResponse getTicketById(@RequestBody TicketStatus ticketStatus) {
         return ticketService.getTicketByStatus(ticketStatus);
     }
 
     @GetMapping("/{id}/order")
     @ResponseStatus(OK)
-    public OrderResponse getOrderByOrderId(@PathVariable Long orderId){
+    public OrderResponse getOrderByOrderId(@PathVariable Long orderId) {
         return ticketService.getOrderByOrderId(orderId);
     }
 
